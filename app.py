@@ -2,8 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import re
 import requests
 import random, string
-def rand_str(n): return ''.join(random.choices(string.ascii_letters + string.digits + '-_', k=n))
-
 
 import os
 app = Flask(__name__)
@@ -12,7 +10,9 @@ app.config['DOWNLOAD_FOLDER'] = 'static/downloads'
 app.config['ALLOWED_EXTENSIONS'] = {'mp4'}
 # Ensure download directory exists
 os.makedirs(app.config['DOWNLOAD_FOLDER'], exist_ok=True)
-print("Wellcome to my app cookes")
+print("Wellcome to my app")
+
+def rand_str(n): return ''.join(random.choices(string.ascii_letters + string.digits + '-_', k=n))
 def download_video(video_url):
     try:
         cookies = {
@@ -38,7 +38,8 @@ def download_video(video_url):
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36',
 }
         # Send a GET request to the video URL
-        os.system('cls')
+        # os.system('cls')
+        os.system('clear')
         print("Downloading video from: ", video_url)
         response = requests.get(video_url, headers=headers,cookies=cookies).text.replace('\\','')
         open(os.path.join(app.config['DOWNLOAD_FOLDER'], 'tempss.txt'), 'w' ,encoding= 'utf-8').write(response)
