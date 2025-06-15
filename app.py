@@ -8,6 +8,7 @@ app.config['DOWNLOAD_FOLDER'] = 'static/downloads'
 app.config['ALLOWED_EXTENSIONS'] = {'mp4'}
 # Ensure download directory exists
 os.makedirs(app.config['DOWNLOAD_FOLDER'], exist_ok=True)
+print("Wellcome to my app")
 def download_video(video_url):
     try:
         headers = {
