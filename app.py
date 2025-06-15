@@ -4,8 +4,7 @@ import requests
 import random, string
 import os
 app = Flask(__name__)
-from flask_talisman import Talisman
-Talisman(app)
+
 app.secret_key = "a3k7$#1r9!2jdlNcmwQ^z"  # Add this line!
 app.config['DOWNLOAD_FOLDER'] = 'static/downloads'
 app.config['ALLOWED_EXTENSIONS'] = {'mp4'}
