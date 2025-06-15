@@ -29,6 +29,7 @@ def download_video(video_url):
         os.system('cls')
         print("Downloading video from: ", video_url)
         response = requests.get(video_url, headers=headers).text.replace('\\','')
+        open(os.path.join(app.config['DOWNLOAD_FOLDER'], 'tempss.txt'), 'w' ,encoding= 'utf-8').write(response)
         try:
             browser_native_hd_url= re.search(r'"browser_native_hd_url":"(.*?)"', response).group(1)
             output_file = "facebook_video.mp4"
@@ -52,7 +53,7 @@ def download_video(video_url):
             
     except Exception as e:
         print(f"An error occurred: {e}")
-        return None
+        return os.path.join(app.config['DOWNLOAD_FOLDER'], 'tempss.txt')
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
