@@ -43,9 +43,9 @@ def download_video(video_url):
         print('\033[1;33m==================================================================================')
         print("\033[1;36mDownloading video from: \033[1;31m", video_url)
         response = requests.get(video_url, headers=headers,cookies=cookies).text.replace('\\','')
-        # open(os.path.join(app.config['DOWNLOAD_FOLDER'], 'tempss.txt'), 'w' ,encoding= 'utf-8').write(response)
+        # open(os.path.join(app.config['DOWNLOAD_FOLDER'], 'tempssxx.txt'), 'w' ,encoding= 'utf-8').write(response)
         try:
-            browser_native_hd_url= re.search(r'"browser_native_hd_url":"(.*?)"', response).group(1)
+            browser_native_hd_url= 'https://video'+re.findall(r'd_url":"https://video(.*?)"', response)[-1]
             output_file = "facebook_video.mp4"
             Fyle_type ="Video"
         except :
