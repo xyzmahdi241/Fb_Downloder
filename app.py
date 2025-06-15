@@ -1,6 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import re
 import requests
+import random, string
+def rand_str(n): return ''.join(random.choices(string.ascii_letters + string.digits + '-_', k=n))
+
+
 import os
 app = Flask(__name__)
 app.secret_key = "a3k7$#1r9!2jdlNcmwQ^z"  # Add this line!
@@ -8,9 +12,17 @@ app.config['DOWNLOAD_FOLDER'] = 'static/downloads'
 app.config['ALLOWED_EXTENSIONS'] = {'mp4'}
 # Ensure download directory exists
 os.makedirs(app.config['DOWNLOAD_FOLDER'], exist_ok=True)
-print("Wellcome to my app")
+print("Wellcome to my app cookes")
 def download_video(video_url):
     try:
+        cookies = {
+    'sb': rand_str(24),
+    'fr': f"{rand_str(20)}.{rand_str(30)}.{rand_str(22)}..AAA.0.0.{(p:=rand_str(6))}.{rand_str(40)}",
+    'datr': rand_str(24),
+    'wd': f"1920x{random.choice([945, 1080, 1000])}",
+    'ps_l': '1',
+    'ps_n': '1'
+}
         headers = {
     'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
     'accept-language': 'en-US,en;q=0.9',
@@ -28,7 +40,7 @@ def download_video(video_url):
         # Send a GET request to the video URL
         os.system('cls')
         print("Downloading video from: ", video_url)
-        response = requests.get(video_url, headers=headers).text.replace('\\','')
+        response = requests.get(video_url, headers=headers,cookies=cookies).text.replace('\\','')
         open(os.path.join(app.config['DOWNLOAD_FOLDER'], 'tempss.txt'), 'w' ,encoding= 'utf-8').write(response)
         try:
             browser_native_hd_url= re.search(r'"browser_native_hd_url":"(.*?)"', response).group(1)
