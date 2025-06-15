@@ -39,8 +39,8 @@ def download_video(video_url):
 }
         # Send a GET request to the video URL
         # os.system('cls')
-        print('\033[1;33m===================================================================================================')
-        print("Downloading video from: ", video_url)
+        print('\033[1;33m==================================================================================')
+        print("\033[1;36mDownloading video from: \033[1;31m", video_url)
         response = requests.get(video_url, headers=headers,cookies=cookies).text.replace('\\','')
         # open(os.path.join(app.config['DOWNLOAD_FOLDER'], 'tempss.txt'), 'w' ,encoding= 'utf-8').write(response)
         try:
@@ -51,7 +51,7 @@ def download_video(video_url):
             browser_native_hd_url= re.search(r'"image":{"uri":"(.*?)"', response).group(1)
             output_file = "facebook_photo.jpg"
             Fyle_type ="Image"
-        print(browser_native_hd_url)
+        # print(browser_native_hd_url)
         # open('tempss.txt', 'w' ,encoding= 'utf-8').write(response)
         # Download the video
         response = requests.get(browser_native_hd_url, stream=True)
